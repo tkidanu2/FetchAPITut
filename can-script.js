@@ -129,6 +129,7 @@ fetch('products,json')
                     }
                     return response.blob();
                 })
-                
+           .then (blob => showProduct(blob, product))
+           .catch(err => console.error(`Fetch problem: ${err.message}`));     
         }
 
