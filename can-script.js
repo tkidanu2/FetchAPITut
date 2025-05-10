@@ -133,3 +133,35 @@ fetch('products,json')
            .catch(err => console.error(`Fetch problem: ${err.message}`));     
         }
 
+        //Display a product inside the <main> element
+        function showProduct(blob,product){
+            //convert the blob to an object URL - this is basically a temporary internal URL that points to an object stored inside the browser
+            const objectURL = URL.createObjectURL(blob);
+            //create <section>, <h2>, <p>, and <img> elements
+            const section = document.createElement('section');
+            const heading = document.createElement('h2');
+            const para = document.createElement('p');
+            const image = document.createElement('img');
+
+            //give the <section> a classname equal to the product "type" property so it will display the correct icon
+            section.setAttribute('class', product.type);
+
+            //give the <h2> textContent equal to the product name property, but with the first Character replaced with uppercase version of the first character
+            heading.textContent = product.name.replace(product.name.charAt(0), product.name.charAt(0).toUpperCase());
+
+            //Give the <p> textContent equal to the product "price" property, but with a $ sign in front
+            //toFixed(2) is used to fix the price at 2 decimal places, so for example 1.40 is displayed as 1.40 is displayed as 1.40 not 1.4.
+
+            para.textContent = `$${product.price.toFixed(2)}`;
+
+            //Set the src of the <img> element to the Object URL, and the alt to the product "name" property
+            image.src = objectURL;
+            image.alt = product.name;
+
+            //append the element to the DOM as appropriate, to add the product to the UI
+            main.appendChild(section);
+            section.appendChild(heading);   
+            section.appendChild(para);
+            section.appendChild(image);
+        }
+    }
