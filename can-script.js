@@ -129,5 +129,6 @@ fetch('products,json')
                     }
                     return response.blob();
                 })
+                
         }
 
